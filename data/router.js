@@ -13,7 +13,17 @@ router.post('/', async (req, res)=>{
         }
     }
     catch(error){
-        res.
+        res.status(500).json({ error: "There was an error while saving the post to the database" })
+    }
+})
+
+router.get('/', async (req, res) => {
+    try {
+        const posts = await db.find(req.query)
+        res.status(200).json(posts)
+    } catch(error) {
+        console.log(error)
+        res.status(500).json({ error: "The posts information could not be retrieved." })
     }
 })
 
